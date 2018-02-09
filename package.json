@@ -1,5 +1,5 @@
 {
-  "name": "myapp",
-  "private": true,
+  "name": "Reimagined Waddle",
+  "private": false,
   "dependencies": {}
 }
