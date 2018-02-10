@@ -5,7 +5,8 @@ This project is a REST API that generates language statistics for organizations 
 ## Requirements
 * Unix shell
 * Ruby 2.5.0
-* Ruby on Rails 5.1.4 
+* Ruby on Rails 5.1.4
+* Bundler 1.16.1 
 * cURL 7.58.0
 * GitHub account
 
