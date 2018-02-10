@@ -4,7 +4,7 @@ class Api::LanguagesController < ApplicationController
 
   def index
     puts "Using authorization token: #{TOKEN}..."
-    organization = 'skroutz'
+    organization = params['organization']
     repos_hash = perform_http_request "https://api.github.com/orgs/#{organization}/repos?type=source"
     all_projects_langs_hash = {}
     repos_hash.each do |repo|
@@ -14,6 +14,7 @@ class Api::LanguagesController < ApplicationController
     end
 
     langs_to_bytes = {}
+    total_bytes = 0
     all_projects_langs_hash.each do |project, langs|
       puts project
       puts langs
@@ -23,9 +24,20 @@ class Api::LanguagesController < ApplicationController
         else
           langs_to_bytes[lang] += bytes
         end
+        total_bytes += bytes
       end
     end
-    render json: langs_to_bytes
+    langs_to_bytes_sorted = langs_to_bytes.sort_by {|key, value| value}.reverse
+
+    puts "Total bytes: #{total_bytes}"
+    langs_to_percentage = {}
+    langs_to_bytes_sorted.each do |lang, bytes|
+      puts "#{lang} -> #{bytes} bytes"
+      percentage = (bytes.to_f / total_bytes.to_f * 100 * 100).floor / 100.0
+      puts "Percentage: #{percentage}%"
+      langs_to_percentage[lang] = "#{percentage}%"
+    end
+    render json: langs_to_percentage
   end
 
   def perform_http_request(url)
