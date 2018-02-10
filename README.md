@@ -8,7 +8,7 @@ This project is a REST API that generates language statistics for organizations 
 * Ruby on Rails 5.1.4
 * Bundler 1.16.1 
 * cURL 7.58.0
-* GitHub account
+* GitHub account with a valid token (see https://github.com/settings/tokens)
 
 
 ## Steps to get the REST API up and running
