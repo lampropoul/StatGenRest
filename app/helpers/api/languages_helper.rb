@@ -1,3 +1,5 @@
+require 'net/http'
+
 module Api::LanguagesHelper
 
   def perform_http_request(url, token)
