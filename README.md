@@ -47,3 +47,12 @@ This project is a REST API that generates language statistics for organizations 
   "Shell": "0.01%"
 }
 ```
+
+## Save data to json files for analyzing
+```
+[yourself@yourpc] cd to/project/dir/command_line_tool/
+[yourself@yourpc] export ORGANIZATION='replace_with_organization_name'
+[yourself@yourpc] export GITHUB_TOKEN='replace_with_token'
+[yourself@yourpc] ./get-stats.sh $ORGANIZATION $GITHUB_TOKEN
+[yourself@yourpc] cat $ORGANIZATION-stats.json
+```
