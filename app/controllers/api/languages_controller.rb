@@ -5,8 +5,12 @@ class Api::LanguagesController < ApplicationController
     @@token = request.headers['Authorization']
     render(json: JSON.pretty_generate(error: 'No authorization token provided. Visit https://github.com/settings/tokens to get one.')) && return if @@token.nil? || @@token == ''
     puts "Using authorization: #{@@token}..."
+
     organization = params['organization']
+    render(json: JSON.pretty_generate(error: 'No organization provided.')) && return if organization.nil? || organization == ''
+
     response = perform_http_request "https://api.github.com/orgs/#{organization}/repos?type=source", @@token
+    render(json: JSON.pretty_generate(error: 'Organization not found.')) && return if response.code == '404' # ORGANIZATION NOT FOUND
     render_error && return if response.code == '401' # UNAUTHORIZED
     repos_hash = JSON.parse response.body
 
