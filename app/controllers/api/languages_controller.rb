@@ -3,15 +3,15 @@ class Api::LanguagesController < ApplicationController
 
   def index
     @@token = request.headers['Authorization']
-    render(json: JSON.pretty_generate(error: 'No authorization token provided. Visit https://github.com/settings/tokens to get one.')) && return if @@token.nil? || @@token == ''
+    render_error_no_auth_token && return if @@token.nil? || @@token == ''
     puts "Using authorization: #{@@token}..."
 
     organization = params['organization']
-    render(json: JSON.pretty_generate(error: 'No organization provided.')) && return if organization.nil? || organization == ''
+    render_error_no_org_provided && return if organization.nil? || organization == ''
 
     response = perform_http_request "https://api.github.com/orgs/#{organization}/repos?type=source", @@token
-    render(json: JSON.pretty_generate(error: 'Organization not found.')) && return if response.code == '404' # ORGANIZATION NOT FOUND
-    render_error && return if response.code == '401' # UNAUTHORIZED
+    render_error_not_found && return if response.code == '404' # ORGANIZATION NOT FOUND
+    render_error_unauthorized && return if response.code == '401' # UNAUTHORIZED
     repos_hash = JSON.parse response.body
 
     projects_to_langs = {}
@@ -19,7 +19,7 @@ class Api::LanguagesController < ApplicationController
     repos_hash.each do |repo|
       repo_name = repo['name']
       response = perform_http_request repo['languages_url'], @@token
-      render_error && return if response.code == '401' # UNAUTHORIZED
+      render_error_unauthorized && return if response.code == '401' # UNAUTHORIZED
       repo_lang_usage = JSON.parse response.body
       projects_to_langs[repo_name] = repo_lang_usage # an entry should be something like {"skroutz.rb" => {"Ruby"=>58462}}
     end
