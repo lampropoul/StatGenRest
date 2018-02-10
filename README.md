@@ -55,4 +55,28 @@ This project is a REST API that generates language statistics for organizations 
 [yourself@yourpc] export GITHUB_TOKEN='replace_with_token'
 [yourself@yourpc] ./get-stats.sh $ORGANIZATION $GITHUB_TOKEN
 [yourself@yourpc] cat $ORGANIZATION-stats.json
+{
+  "Ruby": "39.19%",
+  "TypeScript": "19.27%",
+  "JavaScript": "17.43%",
+  "C++": "13.24%",
+  "Python": "5.12%",
+  "Java": "2.11%",
+  "C": "1.28%",
+  "HTML": "1.05%",
+  "CSS": "0.94%",
+  "Shell": "0.09%",
+  "Ragel": "0.04%",
+  "Makefile": "0.04%",
+  "Protocol Buffer": "0.04%",
+  "Dart": "0.03%",
+  "Lua": "0.02%",
+  "Go": "0.01%",
+  "PHP": "0.0%",
+  "Mako": "0.0%",
+  "LiveScript": "0.0%",
+  "M4": "0.0%",
+  "Batchfile": "0.0%",
+  "XSLT": "0.0%"
+}
 ```
