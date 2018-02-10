@@ -37,7 +37,7 @@ class Api::LanguagesController < ApplicationController
       puts "Percentage: #{percentage}%"
       langs_to_percentage[lang] = "#{percentage}%"
     end
-    render json: langs_to_percentage
+    render json: JSON.pretty_generate(langs_to_percentage)
   end
 
   def perform_http_request(url)
