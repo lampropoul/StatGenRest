@@ -14,6 +14,12 @@ describe 'API testing', type: :request do
     expect(json['error']).to eq('No organization provided.')
   end
 
+  it 'should return that no organization provided' do
+    get '/languages', params: {format: 'json'}, headers: {Authorization: "token #{ENV['GITHUB_TOKEN']}"}
+    json = JSON.parse response.body
+    expect(json['error']).to eq('No organization provided.')
+  end
+
   it 'should return that provided organization does not exist' do
     get '/languages', params: {format: 'json', organization: 'QwErTy1234567890'}, headers: {Authorization: "token #{ENV['GITHUB_TOKEN']}"}
     json = JSON.parse response.body
