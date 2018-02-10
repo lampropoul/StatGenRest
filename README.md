@@ -26,7 +26,7 @@ This project is a REST API that generates language statistics for organizations 
 ```
 
 
-## Examples
+## Examples (REST API must be running)
 ```
 [yourself@yourpc] export ORGANIZATION='replace_with_organization_name'
 [yourself@yourpc] export GITHUB_TOKEN='replace_with_token'
@@ -48,7 +48,7 @@ This project is a REST API that generates language statistics for organizations 
 }
 ```
 
-## Save data to json files for analyzing
+## Save data to json files for analyzing (REST API must be running)
 ```
 [yourself@yourpc] cd to/project/dir/command_line_tool/
 [yourself@yourpc] export ORGANIZATION='replace_with_organization_name'
