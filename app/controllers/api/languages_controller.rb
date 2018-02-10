@@ -1,11 +1,12 @@
 class Api::LanguagesController < ApplicationController
+  include Api::LanguagesHelper
 
   def index
     @@token = request.headers['Authorization']
     render(json: JSON.pretty_generate(error: 'No authorization token provided. Visit https://github.com/settings/tokens to get one.')) && return if @@token.nil? || @@token == ''
     puts "Using authorization: #{@@token}..."
     organization = params['organization']
-    response = perform_http_request "https://api.github.com/orgs/#{organization}/repos?type=source"
+    response = perform_http_request "https://api.github.com/orgs/#{organization}/repos?type=source", @@token
     render_error && return if response.code == '401' # UNAUTHORIZED
     repos_hash = JSON.parse response.body
 
@@ -13,7 +14,7 @@ class Api::LanguagesController < ApplicationController
     # iterate over all repos in order to get language stats for each of them
     repos_hash.each do |repo|
       repo_name = repo['name']
-      response = perform_http_request repo['languages_url']
+      response = perform_http_request repo['languages_url'], @@token
       render_error && return if response.code == '401' # UNAUTHORIZED
       repo_lang_usage = JSON.parse response.body
       projects_to_langs[repo_name] = repo_lang_usage # an entry should be something like {"skroutz.rb" => {"Ruby"=>58462}}
@@ -53,19 +54,6 @@ class Api::LanguagesController < ApplicationController
       puts "#{lang} -> #{bytes} bytes (#{percentage_truncated}%)"
     end
     render json: JSON.pretty_generate(langs_to_percentage)
-  end
-
-  def perform_http_request(url)
-    uri = URI.parse(url)
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    request = Net::HTTP::Get.new(uri.request_uri)
-    request['Authorization'] = @@token
-    http.request(request)
-  end
-
-  def render_error
-    render json: JSON.pretty_generate(error: 'Unauthorized. Please use valid token.')
   end
 
 end
