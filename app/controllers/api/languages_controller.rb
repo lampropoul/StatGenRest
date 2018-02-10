@@ -6,13 +6,26 @@ class Api::LanguagesController < ApplicationController
     puts "Using authorization token: #{TOKEN}..."
     organization = 'skroutz'
     repos_hash = perform_http_request "https://api.github.com/orgs/#{organization}/repos?type=source"
-    langs_hash = {}
+    all_projects_langs_hash = {}
     repos_hash.each do |repo|
       lang_usage = perform_http_request repo['languages_url']
       index = repo['name']
-      langs_hash[index] = lang_usage
+      all_projects_langs_hash[index] = lang_usage
     end
-    render json: langs_hash
+
+    langs_to_bytes = {}
+    all_projects_langs_hash.each do |project, langs|
+      puts project
+      puts langs
+      langs.each do |lang, bytes|
+        if langs_to_bytes[lang].nil?
+          langs_to_bytes[lang] = bytes
+        else
+          langs_to_bytes[lang] += bytes
+        end
+      end
+    end
+    render json: langs_to_bytes
   end
 
   def perform_http_request(url)
