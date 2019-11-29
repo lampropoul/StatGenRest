@@ -12,6 +12,8 @@ gem 'rails', '~> 5.1.4'
 gem 'sqlite3', git: "https://github.com/larskanis/sqlite3-ruby", branch: "add-gemspec"
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
+# Rack CORS Middleware
+gem 'rack-cors'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
