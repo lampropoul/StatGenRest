@@ -13,24 +13,25 @@ This project is a REST API that generates language statistics for organizations 
 
 ## Steps to get the REST API up and running
 ```
-[yourself@yourpc] cd to/project/dir
-[yourself@yourpc] bundle install    # install dependencies
-[yourself@yourpc] rails s           # start the server
+$ cd to/project/dir
+$ bundle install                                # install dependencies
+$ bin/rails db:migrate RAILS_ENV=development    # migrate db
+$ rails s                                       # start the server
 ```
 
 
 ## Tests
 ```
-[yourself@yourpc] cd to/project/dir
-[yourself@yourpc] bundle exec rspec spec/controllers/api/languages_controller_spec.rb   # run all tests for this controller
+$ cd to/project/dir
+$ bundle exec rspec spec/controllers/api/languages_controller_spec.rb   # run all tests for this controller
 ```
 
 
 ## Examples (REST API must be running)
 ```
-[yourself@yourpc] export ORGANIZATION='replace_with_organization_name'
-[yourself@yourpc] export GITHUB_TOKEN='replace_with_token'
-[yourself@yourpc] curl -H "Authorization: token $GITHUB_TOKEN" http://127.0.0.1:3000/languages\?format\=json\&organization\=$ORGANIZATION
+$ export ORGANIZATION='replace_with_organization_name'
+$ export GITHUB_TOKEN='replace_with_token'
+$ curl -H "Authorization: token $GITHUB_TOKEN" http://127.0.0.1:3000/languages\?format\=json\&organization\=$ORGANIZATION
 {
   "Ruby": "20.56%",
   "JavaScript": "16.38%",
@@ -50,11 +51,11 @@ This project is a REST API that generates language statistics for organizations 
 
 ## Save data to json files for analyzing (REST API must be running)
 ```
-[yourself@yourpc] cd to/project/dir/command_line_tool/
-[yourself@yourpc] export ORGANIZATION='replace_with_organization_name'
-[yourself@yourpc] export GITHUB_TOKEN='replace_with_token'
-[yourself@yourpc] ./get-stats.sh $ORGANIZATION $GITHUB_TOKEN
-[yourself@yourpc] cat $ORGANIZATION-stats.json
+$ cd to/project/dir/command_line_tool/
+$ export ORGANIZATION='replace_with_organization_name'
+$ export GITHUB_TOKEN='replace_with_token'
+$ ./get-stats.sh $ORGANIZATION $GITHUB_TOKEN
+$ cat $ORGANIZATION-stats.json
 {
   "Ruby": "39.19%",
   "TypeScript": "19.27%",
