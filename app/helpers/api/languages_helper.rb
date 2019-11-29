@@ -12,19 +12,23 @@ module Api::LanguagesHelper
   end
 
   def render_error_unauthorized
-    render json: JSON.pretty_generate(error: 'Unauthorized. Please use valid token.')
+    render json: JSON.pretty_generate(error: 'Unauthorized. Please use valid token.'),
+           status: 401
   end
 
   def render_error_not_found
-    render(json: JSON.pretty_generate(error: 'Organization not found.'))
+    render json: JSON.pretty_generate(error: 'Organization not found.'),
+           status: 404
   end
 
   def render_error_no_org_provided
-    render(json: JSON.pretty_generate(error: 'No organization provided.'))
+    render json: JSON.pretty_generate(error: 'No organization provided.'),
+           status: 400
   end
 
   def render_error_no_auth_token
-    render(json: JSON.pretty_generate(error: 'No authorization token provided. Visit https://github.com/settings/tokens to get one.'))
+    render json: JSON.pretty_generate(error: 'No authorization token provided. Visit https://github.com/settings/tokens to get one.'),
+           status: 401
   end
 
 end

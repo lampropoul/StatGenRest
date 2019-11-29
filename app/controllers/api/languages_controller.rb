@@ -44,7 +44,7 @@ class Api::LanguagesController < ApplicationController
     end
 
     # reverse sort by bytes of each lang in order to have the most used on top
-    langs_to_bytes_sorted = langs_to_bytes.sort_by {|lang, bytes| bytes}.reverse
+    langs_to_bytes_sorted = langs_to_bytes.sort_by { |lang, bytes| bytes }.reverse
 
     puts "Total bytes: #{all_repos_total_bytes}"
     langs_to_percentage = {}
