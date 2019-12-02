@@ -34,7 +34,7 @@ module Api::LanguagesHelper
   end
 
   def gather(all_repos_total_bytes, bytes, lang, langs_to_percentage)
-    percentage = bytes.to_f / all_repos_total_bytes.to_f * 100
+    percentage = bytes.to_f / all_repos_total_bytes * 100
     #  convert to BigDecimal and truncate to 2 decimal digits
     percentage_truncated = percentage.to_d.truncate(2).to_f
     # add to final hash with percentages as strings
