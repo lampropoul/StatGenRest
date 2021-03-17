@@ -4,19 +4,19 @@ This project is a REST API that generates language statistics for organizations 
 
 ## Requirements
 * Unix shell
-* Ruby 2.5.0
-* Ruby on Rails 5.1.4
-* Bundler 1.16.1 
-* cURL 7.58.0
+* Ruby 2.6.3p62
+* Ruby on Rails 5.2.4.5
+* Bundler 1.17.3
+* cURL 7.64.1
 * GitHub account with a valid token (see https://github.com/settings/tokens)
 
 
 ## Steps to get the REST API up and running
 ```
 $ cd to/project/dir
-$ bundle install                                # install dependencies
+$ bundle install --path vendor/bundle           # install dependencies
 $ bin/rails db:migrate RAILS_ENV=development    # migrate db
-$ rails s                                       # start the server
+$ bin/rails s                                   # start the server
 ```
 
 

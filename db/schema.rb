@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180209190520) do
+ActiveRecord::Schema.define(version: 2018_02_09_190520) do
 
   create_table "api_languages", force: :cascade do |t|
     t.datetime "created_at", null: false
