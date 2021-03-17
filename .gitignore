@@ -78,3 +78,4 @@ build-iPhoneSimulator/
 command_line_tool/*.json
 /.generators
 /.rakeTasks
+/Gemfile.lock
