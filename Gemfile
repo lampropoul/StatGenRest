@@ -11,7 +11,7 @@ gem 'rails', '~> 5.2.4.5'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', git: 'https://github.com/larskanis/sqlite3-ruby', branch: 'add-gemspec'
 # Use Puma as the app server
-gem 'puma', '~> 3.12'
+gem "puma", ">= 4.3.9"
 # Rack CORS Middleware
 gem 'rack-cors'
 
